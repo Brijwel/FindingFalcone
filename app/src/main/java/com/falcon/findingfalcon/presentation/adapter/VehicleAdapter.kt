@@ -38,10 +38,12 @@ class VehicleAdapter(
                 it.name,
                 it.getRemainingCount()
             )
-            holder.binding.rootLayout.isEnabled = it.canTravel(destinationPlanet.distance)
-            holder.binding.radioButton.isEnabled = it.canTravel(destinationPlanet.distance)
+            holder.binding.rootLayout.isEnabled =
+                it.canTravel(destinationPlanet.distance) || it.isSelectedForSearch(destinationPlanet.name)
+            holder.binding.radioButton.isEnabled =
+                it.canTravel(destinationPlanet.distance) || it.isSelectedForSearch(destinationPlanet.name)
             holder.binding.outOfRange.isVisible = it.inRange(destinationPlanet.distance).not()
-                                                    && it.isAvailable()
+                    && it.isAvailable()
             holder.binding.radioButton.isChecked = it.isSelectedForSearch(destinationPlanet.name)
         }
     }
