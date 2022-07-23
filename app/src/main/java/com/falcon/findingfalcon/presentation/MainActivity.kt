@@ -27,6 +27,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+        setClickListeners()
+        collectEvents()
+    }
+
+    private fun setClickListeners() {
         binding.findFalcone.setOnClickListener { viewModel.findFalcon() }
         binding.destination1.setOnClickListener(::destinationClickListener)
         binding.destination2.setOnClickListener(::destinationClickListener)
@@ -39,7 +45,9 @@ class MainActivity : AppCompatActivity() {
         binding.vehicle4.setOnClickListener(::vehicleClickListener)
 
         binding.resetGame.setOnClickListener { viewModel.resetGame() }
+    }
 
+    private fun collectEvents() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
